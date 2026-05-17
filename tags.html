@@ -1,0 +1,64 @@
+---
+layout: default
+title: "Tags"
+description: "Browse recipes by tag."
+---
+
+<div class="tags-page">
+  <h1 class="page-title">Browse by Tag</h1>
+
+  <!--
+    Build a map of tag -> [recipes] from the recipes collection.
+    Jekyll's Liquid doesn't have a native group_by for nested arrays,
+    so we build it manually with a loop.
+  -->
+
+  {% assign all_tags = "" | split: "" %}
+  {% for recipe in site.recipes %}
+    {% for tag in recipe.tags %}
+      {% unless all_tags contains tag %}
+        {% assign all_tags = all_tags | push: tag %}
+      {% endunless %}
+    {% endfor %}
+  {% endfor %}
+  {% assign all_tags = all_tags | sort %}
+
+  <!-- Tag cloud (acts as filter buttons via search.js) -->
+  <div class="tag-cloud" role="list" aria-label="Filter by tag">
+    {% for tag in all_tags %}
+      {% assign count = 0 %}
+      {% for recipe in site.recipes %}
+        {% if recipe.tags contains tag %}
+          {% assign count = count | plus: 1 %}
+        {% endif %}
+      {% endfor %}
+      <button
+        class="tag-cloud-item"
+        data-tag="{{ tag | slugify }}"
+        role="listitem"
+        aria-pressed="false"
+        type="button"
+      >
+        {{ tag }}
+        <span class="tag-count">({{ count }})</span>
+      </button>
+    {% endfor %}
+  </div>
+
+  <!-- One group per tag -->
+  {% for tag in all_tags %}
+  <div class="tag-group" id="{{ tag | slugify }}" data-tag="{{ tag | slugify }}">
+    <h2 class="tag-group-heading">
+      <strong>{{ tag }}</strong>
+    </h2>
+    <div class="recipes-grid">
+      {% for recipe in site.recipes %}
+        {% if recipe.tags contains tag %}
+          {% include recipe-card.html recipe=recipe %}
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+  {% endfor %}
+
+</div>

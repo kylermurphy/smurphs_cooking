@@ -1,0 +1,54 @@
+---
+layout: default
+title: "The Recipe Vault"
+description: "A personal collection of recipes, built from scratch."
+---
+
+<section class="home-hero">
+  <p class="home-hero-eyebrow">Personal Collection</p>
+  <h1 class="home-hero-title">
+    Recipes<br><em>worth keeping.</em>
+  </h1>
+  <p class="home-hero-sub">
+    A curated collection of recipes built from Instagram finds, kitchen experiments, and family favourites.
+  </p>
+
+  <div class="search-wrap">
+    <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24"
+         fill="none" stroke="currentColor" stroke-width="2"
+         stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+    </svg>
+    <input
+      id="recipe-search"
+      class="search-input"
+      type="search"
+      placeholder="Search by name, tag, or ingredient…"
+      aria-label="Search recipes"
+      autocomplete="off"
+      spellcheck="false"
+    >
+  </div>
+  <p id="search-count" class="search-count" aria-live="polite" aria-atomic="true"></p>
+</section>
+
+<section class="recipes-section" aria-label="Recipe collection">
+  <div class="recipes-grid" id="recipes-grid">
+
+    {% assign sorted = site.recipes | sort: "title" %}
+    {% for recipe in sorted %}
+      {% include recipe-card.html recipe=recipe %}
+    {% endfor %}
+
+    <!-- Empty state shown by JS when no results match -->
+    <div id="recipes-empty" class="recipes-empty" role="status" style="display:none">
+      <svg width="48" height="48" viewBox="0 0 24 24" fill="none"
+           stroke="currentColor" stroke-width="1" aria-hidden="true">
+        <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
+        <circle cx="12" cy="12" r="10"/><line x1="12" y1="17" x2="12.01" y2="17"/>
+      </svg>
+      <p>No recipes match your search.</p>
+    </div>
+
+  </div>
+</section>

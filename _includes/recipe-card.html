@@ -1,0 +1,55 @@
+<!--
+  Reusable recipe card component.
+  Usage: {% include recipe-card.html recipe=recipe %}
+  Expects a `recipe` variable in scope (a document from site.recipes).
+-->
+<article
+  class="recipe-card"
+  data-title="{{ include.recipe.title | downcase | escape }}"
+  data-tags="{{ include.recipe.tags | join: ',' | downcase | escape }}"
+  data-description="{{ include.recipe.description | downcase | escape }}"
+>
+  <a href="{{ include.recipe.url | relative_url }}" class="recipe-card-link" tabindex="-1" aria-hidden="true"></a>
+
+  <div class="recipe-card-body">
+    <!-- Tags -->
+    {% if include.recipe.tags %}
+    <div class="recipe-card-tags" aria-label="Tags">
+      {% for tag in include.recipe.tags limit:3 %}
+      <a href="{{ '/tags' | relative_url }}#{{ tag | slugify }}" class="tag">{{ tag }}</a>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    <!-- Title -->
+    <h2 class="recipe-card-title">
+      <a href="{{ include.recipe.url | relative_url }}">{{ include.recipe.title }}</a>
+    </h2>
+
+    <!-- Description -->
+    {% if include.recipe.description %}
+    <p class="recipe-card-desc">{{ include.recipe.description }}</p>
+    {% endif %}
+
+    <!-- Meta: time and servings -->
+    <dl class="recipe-card-meta">
+      {% if include.recipe.total_time %}
+      <div class="recipe-meta-item">
+        <dt>Time</dt>
+        <dd>{{ include.recipe.total_time }}</dd>
+      </div>
+      {% elsif include.recipe.cook_time %}
+      <div class="recipe-meta-item">
+        <dt>Cook</dt>
+        <dd>{{ include.recipe.cook_time }}</dd>
+      </div>
+      {% endif %}
+      {% if include.recipe.servings %}
+      <div class="recipe-meta-item">
+        <dt>Serves</dt>
+        <dd>{{ include.recipe.servings }}</dd>
+      </div>
+      {% endif %}
+    </dl>
+  </div>
+</article>

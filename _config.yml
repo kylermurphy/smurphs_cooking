@@ -1,0 +1,39 @@
+title: "The Recipe Vault"
+description: "A personal collection of recipes, built from scratch."
+baseurl: ""        # Set to "/repo-name" if not using a custom domain
+url: ""            # e.g. "https://yourusername.github.io"
+
+# Tell Jekyll about the recipes collection.
+# output: true means each recipe markdown file gets its own HTML page.
+collections:
+  recipes:
+    output: true
+    permalink: /recipes/:name/
+
+# Apply the recipe layout to every file in _recipes/ automatically,
+# so individual markdown files don't need to repeat "layout: recipe".
+defaults:
+  - scope:
+      path: ""
+      type: recipes
+    values:
+      layout: recipe
+
+# Plugins supported natively by GitHub Pages
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag
+
+# Exclude files that don't belong in the built site
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - vendor/
+
+# Markdown settings
+markdown: kramdown
+kramdown:
+  input: GFM          # GitHub Flavoured Markdown
+  hard_wrap: false

@@ -1,0 +1,66 @@
+---
+layout: default
+---
+
+<article class="recipe-page" itemscope itemtype="https://schema.org/Recipe">
+
+  <!-- ── Hero ─────────────────────────────────────── -->
+  <header class="recipe-hero">
+    <div class="recipe-hero-inner">
+
+      {% if page.tags %}
+      <div class="recipe-hero-tags">
+        {% for tag in page.tags %}
+        <a href="{{ '/tags' | relative_url }}#{{ tag | slugify }}" class="tag">{{ tag }}</a>
+        {% endfor %}
+      </div>
+      {% endif %}
+
+      <h1 class="recipe-title" itemprop="name">{{ page.title }}</h1>
+
+      {% if page.description %}
+      <p class="recipe-description" itemprop="description">{{ page.description }}</p>
+      {% endif %}
+
+      <!-- Meta bar -->
+      <dl class="recipe-meta-bar">
+        {% if page.prep_time %}
+        <div class="meta-bar-item">
+          <dt>Prep</dt>
+          <dd itemprop="prepTime">{{ page.prep_time }}</dd>
+        </div>
+        {% endif %}
+        {% if page.cook_time %}
+        <div class="meta-bar-item">
+          <dt>Cook</dt>
+          <dd itemprop="cookTime">{{ page.cook_time }}</dd>
+        </div>
+        {% endif %}
+        {% if page.total_time %}
+        <div class="meta-bar-item">
+          <dt>Total</dt>
+          <dd itemprop="totalTime">{{ page.total_time }}</dd>
+        </div>
+        {% endif %}
+        {% if page.servings %}
+        <div class="meta-bar-item">
+          <dt>Serves</dt>
+          <dd itemprop="recipeYield">{{ page.servings }}</dd>
+        </div>
+        {% endif %}
+      </dl>
+
+    </div>
+  </header>
+
+  <!-- ── Body ─────────────────────────────────────── -->
+  <div class="recipe-body">
+    {{ content }}
+  </div>
+
+</article>
+
+<!-- Back navigation -->
+<div class="recipe-back">
+  <a href="{{ '/' | relative_url }}" class="back-link">← All Recipes</a>
+</div>

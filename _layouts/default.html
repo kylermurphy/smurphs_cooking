@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {% include head.html %}
+</head>
+<body>
+  <!-- Subtle grain overlay for texture (CSS-only, no raster image) -->
+  <div class="grain" aria-hidden="true"></div>
+
+  {% include header.html %}
+
+  <main id="main-content" tabindex="-1">
+    {{ content }}
+  </main>
+
+  {% include footer.html %}
+
+  <script src="{{ '/assets/js/search.js' | relative_url }}" defer></script>
+</body>
+</html>
