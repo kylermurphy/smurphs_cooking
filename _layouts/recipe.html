@@ -53,6 +53,17 @@ layout: default
     </div>
   </header>
 
+  <!-- ── Scaling Controls ────────────────────────── -->
+  <div class="recipe-scaling-controls">
+    <p class="scaling-label">Scale Recipe:</p>
+    <div class="scaling-buttons">
+      <button class="scale-btn" data-scale="0.5" title="Half recipe">½</button>
+      <button class="scale-btn active" data-scale="1" title="Normal recipe">1×</button>
+      <button class="scale-btn" data-scale="2" title="Double recipe">2×</button>
+      <button class="scale-btn" data-scale="3" title="Triple recipe">3×</button>
+    </div>
+  </div>
+
   <!-- ── Body ─────────────────────────────────────── -->
   <div class="recipe-body">
     {{ content }}
