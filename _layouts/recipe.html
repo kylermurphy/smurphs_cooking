@@ -1,5 +1,6 @@
 ---
 layout: default
+png_list = ["instagram","blueapron","hellofresh"]
 ---
 
 <article class="recipe-page" itemscope itemtype="https://schema.org/Recipe">
@@ -46,6 +47,27 @@ layout: default
         <div class="meta-bar-item">
           <dt>Serves</dt>
           <dd itemprop="recipeYield">{{ page.servings }}</dd>
+        </div>
+        {% endif %}
+        {% if page.src_url and page.base_url %}
+        <div class="meta-bar-item">
+          <dt>Link</dt>
+          <dd itemprop="recipeSource">
+            {% for icon in page.png_list %}
+              {% if page.base_url contains icon %}
+              <a href="{{ page.src_url }}" target="_blank" rel="noopener">
+              <img src="../assets/{{ icon }}.png" alt="Link to Recipe">
+              </a>
+                {% break %}
+              {% endif %}
+              {% if forloop.last %}
+              <a href="{{ page.src_url }}" target="_blank" rel="noopener">
+              <img src="../assets/web.png" alt="Link to Recipe">
+              </a>
+              {endif}
+            {% endfor %}
+
+          </dd>
         </div>
         {% endif %}
       </dl>
