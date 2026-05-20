@@ -13,6 +13,7 @@ prep_time: ""
 cook_time: "20-25 minutes"
 total_time: ""
 src_url: "https://www.instagram.com/p/DMAsFO2A9ak/"
+base_url: "https://www.instagram.com/"
 ---
 
 ## Ingredients
