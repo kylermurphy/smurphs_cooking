@@ -12,6 +12,7 @@ servings: ""
 prep_time: "2-6 hours"
 cook_time: "35-40 mins"
 total_time: ""
+src_url: "https://www.instagram.com/p/C6wht0IOP5s/"
 ---
 
 ## Ingredients

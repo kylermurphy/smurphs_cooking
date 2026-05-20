@@ -12,6 +12,7 @@ servings: "4"
 prep_time: ""
 cook_time: "12–15 minutes"
 total_time: ""
+src: "https://www.instagram.com/p/DMSD7e0IT3z/"
 ---
 
 ## Ingredients
