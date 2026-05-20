@@ -608,6 +608,9 @@ ul, ol { list-style: none; }
 .meta-bar-item dd {
   font-size: 0.9375rem;
   color: var(--gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* Body (contains the rendered markdown) */
