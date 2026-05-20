@@ -2,6 +2,7 @@ title: "The Recipe Vault"
 description: "A personal collection of recipes, built from scratch."
 baseurl: "/smurphs_cooking"       # Set to "/repo-name" if not using a custom domain
 url: "https://kylermurphy.github.io"            # e.g. "https://yourusername.github.io"
+png_list: ["instagram","blueapron","hellofresh"]
 
 # Tell Jekyll about the recipes collection.
 # output: true means each recipe markdown file gets its own HTML page.
