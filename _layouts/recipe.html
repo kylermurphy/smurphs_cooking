@@ -53,7 +53,7 @@ png_list = ["instagram","blueapron","hellofresh"]
         <div class="meta-bar-item">
           <dt>Link</dt>
           <dd itemprop="recipeSource">
-            {% for icon in page.png_list %}
+            {% for icon in site.png_list %}
               {% if page.base_url contains icon %}
               <a href="{{ page.src_url }}" target="_blank" rel="noopener">
               <img src="../assets/{{ icon }}.png" alt="Link to Recipe">
