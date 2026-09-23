@@ -3,8 +3,8 @@ title: "Slow Cooker Beef & Broccoli"
 description: "A low effort slow cooker version of the restaurant classic beef and broccoli."
 date: 2026-05-18
 tags:
-  - Korean
-  - Asian
+  - korean
+  - asian
   - slow cooker
   - beef
   - broccoli

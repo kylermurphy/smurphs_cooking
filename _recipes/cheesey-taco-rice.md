@@ -3,7 +3,7 @@ title: "Cheesey Taco Rice"
 description: "Cheesy Taco Rice is an easy one pan meal!"
 date: 2026-05-18
 tags:
-  - Mexican
+  - mexican
   - one pan
   - taco rice
   - beef

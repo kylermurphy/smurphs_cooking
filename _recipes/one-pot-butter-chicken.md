@@ -3,7 +3,7 @@ title: "One Pot Butter Chicken"
 description: "Delicious one pot butter chicken served with homemade garlic naan."
 date: 2026-05-18
 tags:
-  - Indian
+  - indian
   - one pot
   - chicken
   - butter chicken
