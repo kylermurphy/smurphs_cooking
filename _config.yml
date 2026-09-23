@@ -32,6 +32,9 @@ exclude:
   - Gemfile
   - Gemfile.lock
   - vendor/
+  - build.py
+  - templates/
+  - unparsed.md
 
 # Markdown settings
 markdown: kramdown
