@@ -3,10 +3,10 @@ title: "Egg Roll in a Bowl Ramen"
 description: "An easy and delicious spin on a classic, making an incredible meal prep option for the week."
 date: 2026-05-18
 tags:
-  - Asian
-  - Noodles
-  - Meal Prep
-  - High Protein
+  - asian
+  - noodles
+  - meal prep
+  - high protein
 servings: "4"
 prep_time: ""
 cook_time: ""

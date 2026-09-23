@@ -3,8 +3,8 @@ title: "Korean Beef Fried Rice"
 description: "An easy and delicious fried rice meal with lean beef mince and a savory-sweet gochujang sauce."
 date: 2026-05-18
 tags:
-  - Korean
-  - Asian
+  - korean
+  - asian
   - beef
   - fried rice
   - gochujang

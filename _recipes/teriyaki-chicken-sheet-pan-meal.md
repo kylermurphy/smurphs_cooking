@@ -3,7 +3,7 @@ title: "Teriyaki Chicken Sheet Pan Meal"
 description: "An easy and customizable sheet pan meal with chicken, veggies, and teriyaki sauce."
 date: 2026-05-18
 tags:
-  - Asian
+  - asian
   - sheet pan
   - teriyaki
   - chicken
