@@ -1,7 +1,7 @@
 # CLAUDE.md — smurphs_cooking
 
-Instructions for Claude Code **and** cloud (claude.ai) sessions working in this repo.
-Both surfaces read this file. Keep it current when the build or layout changes.
+Instructions for Claude Code **and** claude.ai/code (cloud) sessions working in this repo.
+Both read this file. Keep it current when the build or layout changes.
 
 ## What this is
 Kyle Murphy's personal recipe site ("The Recipe Vault"), a Jekyll site on GitHub Pages at
@@ -51,14 +51,23 @@ Claude Code session — start it from its board row alone, assuming no prior con
 - **PR:** open a PR for that branch. Its description must state the task **ID**, what
   changed, why, how it was tested, and the definition-of-done check. Handback default: a
   draft PR once GitHub is connected; a patch/diff otherwise.
-- **Log:** add `log/<ID>.md` in dev-hub (from `log/TEMPLATE.md`) with the same summary and
-  the PR link, add a row to dev-hub `TASK_LOG.md`, and set the task's **Status** on
-  `TASK_BOARD.md` (`WIP` on PR open, `Done` on merge).
-- **Resume, don't restart:** commit/push to the branch as you go and keep the log's
-  `Status`/`Next step` current; on starting, if a `task/<ID>` branch or `log/<ID>.md`
-  already exists, continue from `Next step` instead of starting over.
+- **Persist the plan:** for any non-trivial or unattended task, write the plan to dev-hub
+  `log/<ID>.md` (`## Plan`, `## Checklist`, `## Next step`) and commit it before heavy work
+  (`plan-task <ID>`). An interactive `plan <ID>` dry run stays ephemeral.
+- **Log:** keep dev-hub `log/<ID>.md` (from `log/TEMPLATE.md`) current with the same summary
+  and the PR link, add a row to dev-hub `TASK_LOG.md`, and set the task's **Status** on
+  `TASK_BOARD.md` → `WIP`. This bookkeeping is committed straight to dev-hub `main`. After
+  the PR merges, `mark-done <ID>` in dev-hub is the only way to set `Done`.
+- **Stop states:** on an ambiguous or irreversible decision set Status `Blocked` and fill
+  `## Blocked / open questions`. When stopping for budget set `Usage-stopped` if able. Either
+  way keep `Next step` current. A run cut off abruptly may not set a status; a `WIP` task with
+  a `task/<ID>` branch is still resumable.
+- **Resume, don't restart:** commit/push to the branch as you go; on starting, if a
+  `task/<ID>` branch or `log/<ID>.md` already exists, resume with `pickup-task <ID>` from
+  `Next step` instead of starting over.
 - **Plan first when present:** if asked to "plan <ID>", propose the approach in chat and
-  make no commits until told to "go"; unattended, go straight to a draft.
+  make no commits until told to "go"; unattended, go straight to a draft (plan persisted
+  first).
 - Build the site locally and check the index, tags, and a recipe page before the PR.
 - Definition of done = the task's row on dev-hub `TASK_BOARD.md`.
 
