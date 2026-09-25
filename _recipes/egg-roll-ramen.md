@@ -13,6 +13,8 @@ cook_time: ""
 total_time: ""
 src_url: "https://www.instagram.com/p/CynRiw7OWi8/"
 base_url: "https://www.instagram.com/"
+redirect_from:
+  - /recipes/egg-roll-ramnen/
 ---
 
 ## Ingredients
