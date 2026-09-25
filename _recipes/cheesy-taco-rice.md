@@ -1,5 +1,5 @@
 ---
-title: "Cheesey Taco Rice"
+title: "Cheesy Taco Rice"
 description: "Cheesy Taco Rice is an easy one pan meal!"
 date: 2026-05-18
 tags:
@@ -14,6 +14,8 @@ cook_time: "20-30 mins"
 total_time: ""
 src_url : "https://www.instagram.com/p/CmtnP3cJscQ/"
 base_url: "https://www.instagram.com/"
+redirect_from:
+  - /recipes/cheesey-taco-rice/
 ---
 
 ## Ingredients
