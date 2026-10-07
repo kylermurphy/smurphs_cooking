@@ -45,11 +45,15 @@ serving-size scaling; no backend.
 Durable facts from past tasks, promoted from `log/<ID>.md` by `mark-done` (max ~15).
 
 - Local build without a Gemfile (until COOK-3): `gem install --user-install jekyll
-  jekyll-feed jekyll-sitemap jekyll-seo-tag`, then `jekyll build`. (COOK-6)
+  jekyll-feed jekyll-sitemap jekyll-seo-tag jekyll-redirect-from`, then `jekyll build`.
+  (COOK-6, COOK-8)
 - `tags.html` groups tags case-sensitively but its anchors use `slugify`, so mixed-case
   tags create duplicate groups. Keep tags lowercase. (COOK-6)
 - Files the site doesn't need must be listed in `_config.yml` `exclude`, or Jekyll
   publishes them. (COOK-1)
+- Renamed recipes keep their old URL with `redirect_from` front matter
+  (`jekyll-redirect-from`, listed in `_config.yml` `plugins`). A Gemfile (COOK-3) must
+  include it. (COOK-8)
 
 ## Task protocol (dev-hub tasks)
 
@@ -60,8 +64,10 @@ board row alone.
 - **Branch** `task/<ID>-<slug>` off the default branch; never commit to `main`.
 - **First commit:** sync this file from its dev-hub master
   (`repos/smurphs_cooking/CLAUDE.md`). Edit instructions in the master, never here.
-- **Plan** saved to dev-hub `log/<ID>.md` before heavy work (`plan-task <ID>`); a `plan <ID>`
-  dry run saves nothing. **Draft PR** following dev-hub's `templates/PULL_REQUEST_TEMPLATE.md`
+- **Plan** saved to dev-hub `log/<ID>.md` before heavy work, naming who does each step (main
+  model or a subagent). `plan-task <ID>` discusses it and **waits for Kyle's go**;
+  `run-task <ID>` plans and runs without waiting, stopping only under dev-hub `CLAUDE.md` →
+  When to stop and ask. A `plan <ID>` dry run saves nothing. **Draft PR** following dev-hub's `templates/PULL_REQUEST_TEMPLATE.md`
   (not copied here): ID, what, why, how tested, DoD check.
 - **Bookkeeping** (`log/<ID>.md`, `TASK_LOG.md` row, board Status → `WIP`) goes straight to
   dev-hub `main`. In a branch-restricted session it goes to the designated branch with an
@@ -72,6 +78,10 @@ board row alone.
   `task/<ID>+<ID>+…-<slug>` and one PR for up to 5 simple tasks; each keeps its own log, and
   commits are prefixed with their ID. A `Blocked` task is dropped from the batch; the rest
   ship. Rules: dev-hub `CLAUDE.md` → Batches.
+- **Features** (dev-hub `FEATURE_BOARD.md`): larger work on one long-lived branch
+  `feature/<ID>-<slug>` (IDs like `<PREFIX>FA`). Its subtasks (`<PREFIX>FA1`, …) are committed
+  straight onto it, each commit prefixed with the subtask ID, after merging the default branch
+  in; one draft PR into `main` carries the whole feature. Rules: dev-hub `CLAUDE.md` → Features.
 - **Learnings:** mark lasting findings as `Learning:` lines in the log; `mark-done` promotes
   them into `## Learnings` above (via the master).
 - **Subagents:** delegate only broad/mechanical work to cheaper models, per dev-hub
