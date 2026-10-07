@@ -30,11 +30,10 @@ plugins:
 # Exclude files that don't belong in the built site
 exclude:
   - README.md
+  - CLAUDE.md
   - Gemfile
   - Gemfile.lock
   - vendor/
-  - build.py
-  - templates/
   - unparsed.md
 
 # Markdown settings
