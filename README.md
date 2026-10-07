@@ -1,36 +1,20 @@
 # The Recipe Vault
 
-A personal recipe site built with Jekyll and hosted on GitHub Pages.
+A personal recipe site built with Jekyll and hosted on GitHub Pages at
+[kylermurphy.github.io/smurphs_cooking](https://kylermurphy.github.io/smurphs_cooking).
 Dark editorial theme, full-text search, and tag filtering — no database, no backend.
 
-## Quick start
-
-### 1. Fork or clone this repo
+## Running locally
 
 ```bash
-git clone https://github.com/yourusername/recipe-vault.git
-cd recipe-vault
+git clone https://github.com/kylermurphy/smurphs_cooking.git
+cd smurphs_cooking
+bundle install
+bundle exec jekyll serve
+# → http://localhost:4000/smurphs_cooking/  (note the /smurphs_cooking baseurl)
 ```
 
-### 2. Configure `_config.yml`
-
-Open `_config.yml` and update:
-
-```yaml
-title: "Your Site Name"
-url: "https://yourusername.github.io"
-baseurl: ""          # Leave empty if using a custom domain
-                     # Set to "/repo-name" for a project page site
-```
-
-### 3. Enable GitHub Pages
-
-In your repo → **Settings → Pages**:
-- Source: **Deploy from a branch**
-- Branch: `main` / `(root)`
-
-GitHub will build and publish your site automatically on every push.
-Your site will be live at `https://yourusername.github.io` (or your custom domain).
+GitHub Pages builds and publishes the site automatically from `main`.
 
 ---
 
@@ -50,6 +34,8 @@ servings: "4"
 prep_time: "15 minutes"
 cook_time: "30 minutes"
 total_time: "45 minutes"
+src_url: "https://www.instagram.com/reel/SHORTCODE/"
+base_url: "https://www.instagram.com"
 ---
 
 ## Ingredients
@@ -73,60 +59,20 @@ The filename becomes the URL slug: `my-great-pasta.md` → `/recipes/my-great-pa
 
 ---
 
-## Importing from Instagram
+## Importing recipes
 
-Use the companion `instagram_recipe.py` module to extract recipes from Instagram
-captions and automatically generate markdown files in the correct format:
-
-```python
-from instagram_recipe import get_recipe_from_post
-
-recipe = get_recipe_from_post("https://www.instagram.com/p/SHORTCODE/")
-
-# Write to _recipes/
-import re, pathlib
-
-slug = re.sub(r"[^a-z0-9]+", "-", recipe.title.lower()).strip("-")
-path = pathlib.Path("_recipes") / f"{slug}.md"
-
-tags_yaml = "\n".join(f"  - {t}" for t in (recipe.tags or []))
-ingredients = "\n".join(f"- {i}" for i in recipe.ingredients)
-instructions = "\n".join(f"{n}. {s}" for n, s in enumerate(recipe.instructions, 1))
-
-path.write_text(f"""---
-title: "{recipe.title}"
-description: ""
-date: {__import__('datetime').date.today()}
-tags:
-{tags_yaml}
-servings: "{recipe.servings or ''}"
-prep_time: "{recipe.prep_time or ''}"
-cook_time: "{recipe.cook_time or ''}"
-total_time: ""
----
-
-## Ingredients
-
-{ingredients}
-
-## Instructions
-
-{instructions}
-
-## Notes
-
-> {recipe.notes or ''}
-""")
-
-print(f"Written to {path}")
-```
+New recipes normally come from
+[**recipe_scraper**](https://github.com/kylermurphy/recipe_scraper) (dev-hub `RCP-`), a
+separate package that scrapes a recipe from Instagram or a general recipe website into this
+same front-matter format, `src_url`/`base_url` included. Run it, then move or paste its
+output `.md` file straight into `_recipes/`. See that repo's README for usage.
 
 ---
 
 ## Markdown reference
 
 | Front matter key | Required | Example                       |
-|------------------|----------|-------------------------------|
+|------------------|----------|--------------------------------|
 | `title`          | ✓        | `"Banana Bread"`              |
 | `description`    |          | `"Moist and rich…"`           |
 | `date`           | ✓        | `2024-01-15`                  |
@@ -135,6 +81,8 @@ print(f"Written to {path}")
 | `prep_time`      |          | `"10 minutes"`                |
 | `cook_time`      |          | `"55 minutes"`                |
 | `total_time`     |          | `"1 hour 5 minutes"`          |
+| `src_url`        |          | original recipe URL (Instagram post, recipe site page) |
+| `base_url`       |          | the source site's base URL, e.g. `"https://www.instagram.com"` — matched against `png_list` in `_config.yml` to pick the source icon shown on the recipe page |
 
 ## Content conventions
 
@@ -143,13 +91,5 @@ print(f"Written to {path}")
 - **Instructions:** Ordered list (`1. step`). Each step is a full sentence or paragraph.
 - **Notes:** Blockquote (`> tip text`). Renders with a gold left border.
 - **Temperatures:** Wrap in backticks (`` `175°C / 350°F` ``) for monospace styling.
-
-## Running locally
-
-```bash
-gem install bundler jekyll
-bundle init
-bundle add jekyll jekyll-feed jekyll-sitemap jekyll-seo-tag
-bundle exec jekyll serve
-# → http://localhost:4000
-```
+- **Tags:** always lowercase — `tags.html` groups them case-sensitively but slugifies their
+  anchors, so a mixed-case tag creates a silent duplicate group.

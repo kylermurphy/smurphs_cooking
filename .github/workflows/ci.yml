@@ -1,0 +1,45 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.3"
+          bundler-cache: true
+
+      - name: Check recipe front matter
+        run: |
+          ruby -ryaml -rdate -e '
+            ok = true
+            files = Dir.glob("_recipes/*.md").sort
+            files.each do |f|
+              content = File.read(f)
+              if content =~ /\A---\n(.*?)\n---\n/m
+                fm = YAML.safe_load($1, permitted_classes: [Date]) || {}
+                missing = %w[title date].reject { |k| fm.key?(k) && !fm[k].to_s.strip.empty? }
+                unless missing.empty?
+                  puts "#{f}: missing #{missing.join(%(, ))}"
+                  ok = false
+                end
+              else
+                puts "#{f}: no front matter"
+                ok = false
+              end
+            end
+            puts(ok ? "#{files.size} recipe(s) OK" : "front-matter check failed")
+            exit(ok ? 0 : 1)
+          '
+
+      - name: Build site
+        run: bundle exec jekyll build
